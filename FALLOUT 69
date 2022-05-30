@@ -1,4 +1,3 @@
-// AUTORES: JOAO VITOR, CARLOS HENRIQUE E JOAO RENAN 
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -48,13 +47,16 @@ struct {
 	int  defesa;
 	int  defpadrao;
 	int  agilidade;
-
+	int  carga;
+    int  ataquespecial;
 } inimigo;
 
 void Escolha1();
 void Escolha2();
 void Escolha3();
+void Assembly();
 void Traje();
+void BOSS();
 void Luta();
 void gameover();
 void youwin();
@@ -92,17 +94,18 @@ void main() {
 			Sleep(100); // sleep 0,5 segundo
 		}
 		
-    
 	printf("\n\nGostaria de iniciar\?:\n");
 	printf("SIM[1] NAO[0] \n->");
 	scanf("%i",&menu);
-   
-	while(menu) {
 	
-	for (i = 0; i <= 100; i++) {                
-          //printf ("\r  %d%%", i);      
-          printf ("  %d%%\r", i);
-          fflush (stdout);
+
+   
+	while(menu==1) {
+	for (i = 0; i <= 100; i++)
+   {                
+      //printf ("\r  %d%%", i);      
+      printf ("  %d%%\r", i);
+      fflush (stdout);
 	  Sleep(50);                      
          
       for (j = 0; j < i; j++)
@@ -117,7 +120,6 @@ void main() {
 
    printf("\n\n");
    system ("cls");
-
 	printf("\n\n----------------------//\\                  *******************************************************************************************************************\n");
 	printf("---------------------///\\                  *******************************************************************************************************************\n");
 	printf("--------------------// + \\                 *******************************************************************************************************************\n");
@@ -545,7 +547,7 @@ void main() {
 				printf("%s: Hora de morrer, %s!.\n",inimigo.nome,personagem.perfil);Sleep(300);
 				system("pause");
 				system("cls");
-				Luta();
+				//Luta();
 
 
                 
@@ -632,7 +634,7 @@ void main() {
 				Escolha2();
 				printf("\n%s: Eu admiro a sua coragem em vim aqui e enfrentar seus problemas como um homem de verdade\n",inimigo.nome);Sleep(300);
 				printf("Felizmente nos dois sabemos como isso termina, sem mais delongas, vamos acabar com isso!\n");Sleep(300);
-				Luta();
+				//Luta();
 
 				if(personagem.pv<=0 && inimigo.vida>0) {
 					gameover();
@@ -677,7 +679,7 @@ void main() {
 				printf("%s : Alguma ideia do que devemos fazer nesse meio tempo\? Nao eh uma boa ideia ficarmos aqui fora esperando 36 horas, Os vermelhos devem estar a nossa\n",personagem.nome);Sleep(300);
 				printf("procura e mais cedo ou mais tarde eles podem nos encontrar e dai...\n\n");Sleep(300);
 				printf("Richarlison: Ah quer dizer que voce fala\? Meu Deus, por um instante cheguei a pensar que estavamos em uma historia de RPG em que o autor nao sabia como\n");Sleep(300);
-				printf("encaixar um dialogo estilo Mass Effect sem tornar o codigo mais 3 vezes mais complexo. De qualquer forma eh um milagre voce estar falando. Respondendo sua\n");Sleep(300);
+				printf("encaixar um dialogo estilo Mass Effect sem tornar o codigo 3 vezes mais complexo. De qualquer forma eh um milagre voce estar falando. Respondendo sua\n");Sleep(300);
 				printf("pergunta, voce tem toda razao. Da ultima vez que eu estive aqui.\n\n");Sleep(300);
 				printf("%s: La vamos nos de novo...\n\n",personagem.nome);Sleep(300);
 				system("pause");
@@ -689,7 +691,7 @@ void main() {
 				printf("formas, devemos tentar entrar em contato com eles. Eles viviam no leste de Boston no subsolo de uma igreja...\n\n");Sleep(300);
 				system("pause");
 				system("cls");
-				printf("-%s e Richarlison partem em busca de uma das antigas facçoes da Comunidade, aproveitando a  escuridao noturna para se tornarem mais furtivos. Antes que os\n",personagem.nome);Sleep(300);
+				printf("-%s e Richarlison partem em busca de uma das antigas faccoes da Comunidade, aproveitando a  escuridao noturna para se tornarem mais furtivos. Antes que os\n",personagem.nome);Sleep(300);
 				printf("primeiros raios solares tocassem o chao, os dois finalmente chegam na Old North Church, antigo QG da Ferrovia. Apos um longo dialogo com os dois sobreviventes\n");Sleep(300);
 				printf("e os demais membros da Ferrovia, ambos chegam em um consenso. As duas partes pretendem invandir na calada da noite uma delegacia do Comando Vermelho em Cambridge,\n");Sleep(300);
 				printf("derrotar todos os que tivessem ali dentro, roubar os equipamentos e usar o helicoptero que havia no terraco para invadir o Castelo");Sleep(300);
@@ -702,7 +704,7 @@ void main() {
 				system("pause");
 				Escolha2();
 				printf("-Apos o apagao, o %s parecia desnorteado, voce sorrateiramente aparece e comeca a batalha",inimigo.nome);Sleep(300);
-				Luta();
+				//Luta();
 
 
 				if(personagem.pv<=0 && inimigo.vida>0) {
@@ -730,7 +732,7 @@ void main() {
 					system("cls");
 				}
 				
-			    Premiacao2(&personagem.nivel,&personagem.pv,&personagem.pvtotal,&personagem.forca,&personagem.constituicao,&personagem.agilidade,&personagem.destreza,&personagem.itens.dano);
+			    //Premiacao2(&personagem.nivel,&personagem.pv,&personagem.pvtotal,&personagem.forca,&personagem.constituicao,&personagem.agilidade,&personagem.destreza,&personagem.itens.dano);
 			    
 			    
 				printf("Richarlison: Conseguimos a delegacia eh nossa. Rapido, sobe no terraco, estamos com tudo pronto pra partir.\n\n");Sleep(300);
@@ -787,45 +789,49 @@ void main() {
 				printf("B-52: %s , vamos arremessar uma carga preciosa. Pegue, sao equipamentos de ultima tecnologia, voce vai precisar deles\n\n",personagem.nome);Sleep(300);
 				system("pause");
 				Traje();
-				printf("-Voce corre em direcao a torre do castelo, local que voce avistou o General indo pela ultima vez. Apos escalar ate a torre, voce encontra uma sala e depois de\n");
+				printf("-Voce corre em direcao a torre do castelo, local que voce avistou o General indo pela ultima vez. Apos escalar ate a torre, voce encontra uma sala e depois de\n");Sleep(300);
 				printf("arrebentar a porta, voce encontra o General se rendendo.\n");
-				printf("General Girotto: Voce venceu, eu me rendo. Por favor eu imploro, nao me mate. Nao sou eu a pessoa por tras desse exercito. Confie em mim, se realmente quiser\n");
-				printf("saber quem esta por tras disso tudo, ele esta atras daquela porta\n");
-				printf("-Voce caminha em diracao a uma grande porta de ferro, voce abre a porta, ha uma longa escada, e de repende alguem empurra voce e a porta se tranca atras de voce\n");
-				printf("General Girotto: Eu sinto muito, eu nao sou o vilao dessa historia. Ha uma antiga profecia, voce tem que torna-la verdadeira. Eh a nossa ultima esperanca, salve\n");
-				printf("nossas almas, por favor.\n");
-				printf("-Voce lentamente desce as escadas, quando finalmente termina de descer, o mau o aguarda\n");
+				printf("General Girotto: Voce venceu, eu me rendo. Por favor eu imploro, nao me mate. Nao sou eu a pessoa por tras desse exercito. Confie em mim, se realmente quiser\n");Sleep(300);
+				printf("saber quem esta por tras disso tudo, ele esta atras daquela porta\n");Sleep(300);
+				printf("-Voce caminha em diracao a uma grande porta de ferro, voce abre a porta, ha uma longa escada, e de repende alguem empurra voce e a porta se tranca atras de voce\n");Sleep(300);
+				printf("General Girotto: Eu sinto muito, eu nao sou o vilao dessa historia. Ha uma antiga profecia, voce tem que torna-la verdadeira. Eh a nossa ultima esperanca, salve\n");Sleep(300);
+				printf("nossas almas, por favor.\n");Sleep(300);
+				printf("-Voce lentamente desce as escadas, quando finalmente termina de descer, o mau o aguarda\n");Sleep(300);
 				system("pause");
 				system("cls");
-				Escolha3();
-				printf("%s : Entao, voce aqui estamos nos. A profecia dos antigos ancioes diz que o dia final do imperio comeca hoje, mas eles podem estar errados.Mas antes\n",inimigo.nome);
-				printf("eu tenho duas propostas para voce a primeira eh, voce desiste de lutar contra mim e nos dois podemos reinar cada centimetro desse pais, o imperio sera seu e \n");
-				printf("todas as almas serao nossas e voce ter tudo o que sempre desejou. Tambem tenho a segunda opccao: voce e eu em uma luta ate a morte, pode tentar a sorte e tornar\n");
-				printf("a profecia verdadeira. E entao, o que vai ser\?\n");
-				printf("-Voce rapidamente puxa a sua arma e destrava.");
+				Assembly();
+				printf("%s : Entao... aqui estamos nos. A profecia dos antigos ancioes diz que o dia final do imperio comeca hoje, mas eles podem estar errados.Mas antes\n",inimigo.nome);Sleep(300);
+				printf("eu tenho duas propostas para voce a primeira eh, voce desiste de lutar contra mim e nos dois podemos reinar cada centimetro desse pais, o imperio sera seu e \n");Sleep(300);
+				printf("todas as almas serao nossas e voce ter tudo o que sempre desejou. Tambem tenho a segunda opccao: voce e eu em uma luta ate a morte, pode tentar a sorte e tornar\n");Sleep(300);
+				printf("a profecia verdadeira. E entao, o que vai ser\?\n");Sleep(300);
+				printf("-Voce rapidamente puxa a sua arma e destrava.");Sleep(300);
 				printf("%s : Parece que voce ja fez sua escolha...\n",inimigo.nome);  
 				// DIALOGO FINAL ATÉ O BOSS  
-				Luta();
+				BOSS();
 
                 if(personagem.pv<=0 && inimigo.vida>0) {
 					gameover();
-					printf("-Apos uma longa batalha, a profecia se tornou falsa. Voce foi destruido, o exercito da NCR foi massacrado e todas as resistencias foram exterminadas, o pais foi\n");
-					printf("dizimado e renasceu sobre a bandeira do Comando Vermelho, a liberdade como conhecemos hoje jamais sera alcancada novamente e seu nome jaz como um mito de esperenca\n");
-					printf("o irrefreavel exercito avanca por todo o territorio, voce nunca mais sera lembrado...");
-					printf("FIM\?");
-					printf("       \t\tAperte 1 para voltar para o menu\n");
-					printf("       \t\t->");
+					printf("-Apos uma longa batalha, a profecia se tornou falsa. Voce foi destruido, o exercito da NCR foi massacrado e todas as resistencias foram exterminadas, o pais foi\n");Sleep(300);
+					printf("dizimado e renasceu sobre a bandeira do Comando Vermelho, a liberdade como conhecemos hoje jamais sera alcancada novamente e seu nome jaz como um mito de esperenca\n");Sleep(300);
+					printf("o irrefreavel exercito avanca por todo o territorio, voce nunca mais sera lembrado...");Sleep(300);
+					printf("FIM\?");Sleep(300);
+					printf("       \t\tAperte 1 para voltar para o menu\n");Sleep(300);
+					printf("       \t\t->");Sleep(300);
 					scanf("%i", &menu);
 					system("cls");
 					continue;
 				}
 
 				else if(personagem.pv>0 && inimigo.vida<=0) {
-                    youwin();
-					printf("-Apos uma longa batalha, a profecia se concretizou. Os soldados do Comando Vermelho parecem terem sido libertados de uma especie de transe, a cena caotica de guerra\n");
-					printf("no castelo cessou, o restos do que um dia foi o grande senhor do Comando Vermelho jaz no chao. A luz do sol chega revelando um renascimento de esperanca e liberdade\n");
-					printf("para todo o pais, as estruturas do Comando Vermelho foram destruidas. Seu nome ecoa e sera para sempre lembrado por todos como uma luz na escuridao\n");
+                    system("pause");
+                    system("cls");
+					printf("-Apos uma longa batalha, a profecia se concretizou. Os soldados do Comando Vermelho parecem terem sido libertados de uma especie de transe, a cena caotica de guerra\n");Sleep(300);
+					printf("no castelo cessou, o restos do que um dia foi o grande senhor do Comando Vermelho jaz no chao. A luz do sol chega revelando um renascimento de esperanca e liberdade\n");Sleep(300);
+					printf("para todo o pais, as estruturas do Comando Vermelho foram destruidas. Seu nome ecoa e sera para sempre lembrado por todos como uma luz na escuridao\n");Sleep(300);
 					printf("FIM\n");
+					system("pause");
+					printf("\n\n\n\n\n");
+					youwin();
 					system("pause");
 					exit(0);
 
@@ -968,9 +974,9 @@ void Escolha3() {
 void Luta() {
 //QUEBRE ESTE COMENTARIO PARA ACESSAR O GODMODE
 
-	/*personagem.itens.dano=9999;
+	personagem.itens.dano=9999;
 	personagem.itens.defesa=9999;
-	personagem.pv=9999;*/
+	personagem.pv=9999;
 
 
 	srand(time(NULL));
@@ -2107,6 +2113,7 @@ void Luta() {
 
 
 void Traje() {
+	
 	system("cls");
 	printf("\n-Uma grande capsula de metal cai na sua frente, ela se abre revelando uma grande quantidade de itens interessantes.\n\n");Sleep(300);
 	printf("Soro misterioso adquirido.\n\n");Sleep(300);
@@ -2143,8 +2150,1222 @@ void Traje() {
 	printf("--|ARMA: %s\n",personagem.itens.arma);
 	printf("--|DANO: %i\n",personagem.itens.dano);
 	printf("--|BFG9000 DANO: %i\n",personagem.itens.BFG9000);
-	printf("--|BFG9000 CARGA:%i\n",personagem.itens.carga);
+	printf("--|BFG9000 CARGA:%i\n\n\n",personagem.itens.carga);
 
+}
+
+
+
+//MONTAGEM DO BOSS
+void Assembly(){
+	strcpy(inimigo.nome,"20COMER70CORRER");
+	personagem.nome[strlen(personagem.nome) - 1] = '\0';
+	inimigo.dano=personagem.itens.dano+10;
+	inimigo.defesa=personagem.itens.defesa+100;
+	inimigo.vida=personagem.pv+100;
+	inimigo.vidatotal=inimigo.vida;
+	inimigo.defpadrao=inimigo.defesa;
+	inimigo.ataquespecial=110;
+	inimigo.carga=1;
+	
+}
+
+
+//LUTA FINAL
+void BOSS(){
+	
+	srand(time(NULL));
+	int dado1l6=(rand()%6)+1;
+	int dado2l6=(rand()%6)+1;
+	int dado3l6=(rand()%6)+1;
+	
+	//DADOS DO INIMIGO
+	int dado1l5=(rand()%5)+1;
+	int dado1l4=(rand()%4)+1;
+	int dado1l3=(rand()%3)+1;
+	
+	
+	int stimpak1=0;
+	int stimpak2=0;
+	int comando=0;
+	int attack1=0;
+	int attack2=0;
+	int soma=0;
+	
+	while(personagem.pv>0 && inimigo.vida>0){
+	printf("\n");
+	system("pause");
+	system("cls");
+	printf("|PERSONAGEM: %s\t\t\t|ADVERSARIO: %s\n",personagem.nome,inimigo.nome);
+	printf("|ARMADURA: %i/%i\t\t\t|ARMADURA: %i/%i\n",personagem.itens.defesa,personagem.itens.defpadrao1,inimigo.defesa,inimigo.defpadrao);
+	printf("|VIDA: %i/%i\t\t\t\t|VIDA: %i/%i\n",personagem.pv,personagem.pvtotal, inimigo.vida, inimigo.vidatotal);
+	printf("|DANO: %i\t\t\t\t|DANO: %i\n", personagem.itens.dano,inimigo.dano);
+	printf("|STIMPAK: %i/5\t\t\t\t|STIMPAK: %i/5\n\n",abs(stimpak1-5),abs(stimpak2-5));
+
+//O PERSONAGEM SEMPRE COMECA PRIMEIRO
+//IF CASO O PERSONAGEM AINDA TENHA ARMADURA 
+
+    attack1=0; 
+if(personagem.itens.defesa>0){
+	
+if(stimpak1!=5){
+	
+	printf("SEU TURNO\n");
+	printf("1-ATACAR\n");
+	printf("2-DEFENDER\n");
+	printf("3-USAR BFG9000\n");
+	printf("4-USAR STIMPAK\n");
+	printf("5-DESVIAR DO ATAQUE\n");
+	printf("COMANDO:");
+	scanf("%i",&comando);
+	
+switch(comando){
+	
+	case 1:
+	attack1=1;
+//PRIMEIRO VAMOS CHECAR SE ELE AINDA TEM ARMADURA:
+	if(inimigo.defesa>0){
+	soma=inimigo.defesa-personagem.itens.dano;
+
+    //SE EU ATACAR, A ARMADURA SERA DESTRUIDA?
+    //SE SIM:	
+	if(soma<=0){
+	inimigo.defesa=0;
+	printf("-A armadura de %s foi completamente destruida\n",inimigo.nome);
+	printf("-A BFG9000 recebeu mais 1 carga para ser usada\n");
+	personagem.itens.carga=personagem.itens.carga+1;
+	attack1=0;	
+	}
+	
+	//CASO CONTRARIO VAMOS DANIFICAR A ARMADURA
+	else if(soma>0){
+	inimigo.defesa=inimigo.defesa-personagem.itens.dano;
+	printf("Voce causou um dano de %i na armadura de %s\n",personagem.itens.dano, inimigo.nome);	
+	}	
+		
+	}
+	
+//CASO NAO TENHA:
+    else if(inimigo.defesa<=0){
+    inimigo.vida=inimigo.vida-personagem.itens.dano;
+	printf("%s sofreu um dano de %i\n",inimigo.nome,personagem.itens.dano);	
+    }
+	break;
+
+
+//VAMOS NOS DEFENDER	
+	case 2:
+	//EU FUI ATACADO?
+	//SE A RESPOSTA FOR SIM:
+	if(attack2==1){
+	personagem.itens.defesa=personagem.itens.defesa+inimigo.dano;
+	personagem.itens.defesa=personagem.itens.defesa-(inimigo.dano/10);	
+	printf("-Voce se defendeu e o dano causado foi de apenas %i na armadura.\n", (inimigo.dano/10) );		
+	}
+	
+	//SE A RESPOSTA FOR NÃO
+	else if(attack2==0){
+	printf("-Voce se defendeu de um possivel ataque,porem nenhum dano foi causado.\n");	
+	}
+	break;
+	
+	
+	
+	
+	case 3:
+	//A BFG9000 AINDA TER CARGA?
+	//SE A RESPOSTA FOR SIM:
+	if(personagem.itens.carga!=0){
+		
+	//PRIMEIRO VAMOS CHECAR SE ELE AINDA TEM ARMADURA:
+	if(inimigo.defesa>0){
+	soma=inimigo.defesa-personagem.itens.BFG9000;
+
+    //SE EU ATACAR, A ARMADURA SERA DESTRUIDA?
+    //SE SIM:	
+	if(soma<=0){
+	inimigo.defesa=0;
+	printf("-Voce empunha a BFG9000 e dispara, %s sofre um dano em sua armadura de %i pontos.\n",inimigo.nome, personagem.itens.BFG9000);
+	printf("-A armadura de %s foi completamente destruida\n",inimigo.nome);	
+	printf("-A BFG9000 recebeu mais 1 carga para ser usada\n");
+	personagem.itens.carga=personagem.itens.carga+1;	
+	}
+	
+	//CASO CONTRARIO VAMOS DANIFICAR A ARMADURA
+	else if(soma>0){
+	inimigo.defesa=inimigo.defesa - personagem.itens.BFG9000;
+	printf("-Voce empunha a BFG9000 e dispara, %s sofre um dano em sua armadura de %i pontos.\n",inimigo.nome, personagem.itens.BFG9000);	
+	}	
+    }
+	
+    //CASO NAO TENHA:
+    else if(inimigo.defesa<=0){
+    inimigo.vida=inimigo.vida-personagem.itens.dano;
+    printf("-Voce empunha a BFG9000 e dispara, %s sofre um dano em sua vida de %i pontos.\n",inimigo.nome, personagem.itens.BFG9000);
+    }
+    personagem.itens.carga=personagem.itens.carga-1;
+    }
+    
+    
+    //SE A BFG NÃO TIVER MAIS CARGA:
+    else if(personagem.itens.carga==0){
+    printf("-A BFG9000 nao possui mais municao.\n");
+	}
+	break;
+	
+	
+	
+	case 4:
+	dado1l6=(rand()%6)+1;
+	dado2l6=(rand()%6)+1;
+	dado3l6=(rand()%6)+1;
+	
+	soma=dado1l6+dado2l6+dado3l6;
+	personagem.pv=personagem.pv+soma;
+	printf("Stimpak te forneceu %i a mais de vida\n",soma);
+	printf("Voce possui %i de vida\n",personagem.pv);
+	stimpak1=stimpak1+1;
+	break;
+	
+	
+	
+	case 5:
+//EU FUI ATACADO?
+//SE A RESPOSTA FOR SIM:
+	if(attack2==1){
+		
+	//AINDA TENHO ARMADURA?
+	//SE SIM:
+	if(personagem.itens.defesa!=0){
+	personagem.itens.defesa=personagem.itens.defesa+inimigo.dano;
+	printf("-Voce se desvia do ataque inimigo, nenhum dano foi causado na sua armadura\n");
+	}
+	
+	
+	else if(personagem.itens.defesa==0 && personagem.pv==200){
+	printf("-Voce ate tenta se desviar mas nada pode ser feito\n");	
+	}
+	
+	else if(personagem.itens.defesa==0 && personagem.pv!=200){
+	personagem.pv=personagem.pv+inimigo.dano;
+	printf("-Voce se desvia do ataque inimigo, nenhum dano foi causado em voce\n");	
+	} 	
+	}
+	
+//CASO CONTRARIO:
+	else if(attack2==0){
+	printf("-Voce se desvia do possivel dano causado pelo inimigo, mas ele nao te atacou\n");	
+		
+	}
+	break;
+	
+	default:
+	printf("ERROR, comando invalido");}
+//FIM DAS DECISÕES	
+}
+
+
+else if(stimpak1==5){
+	printf("SEU TURNO\n");
+	printf("1-ATACAR\n");
+	printf("2-DEFENDER\n");
+	printf("3-USAR BFG9000\n");
+	printf("4-DESVIAR DO ATAQUE\n");
+	printf("COMANDO:");
+	scanf("%i",&comando);
+	
+switch(comando){
+	
+	case 1:
+	attack1=1;
+//PRIMEIRO VAMOS CHECAR SE ELE AINDA TEM ARMADURA:
+	if(inimigo.defesa>0){
+	soma=inimigo.defesa-personagem.itens.dano;
+
+    //SE EU ATACAR, A ARMADURA SERA DESTRUIDA?
+    //SE SIM:	
+	if(soma<=0){
+	inimigo.defesa=0;
+	printf("-A armadura de %s foi completamente destruida\n",inimigo.nome);
+	printf("-A BFG9000 recebeu mais 1 carga para ser usada\n");
+	personagem.itens.carga=personagem.itens.carga+1;
+	attack1=0;	
+	}
+	
+	//CASO CONTRARIO VAMOS DANIFICAR A ARMADURA
+	else if(soma>0){
+	inimigo.defesa=inimigo.defesa-personagem.itens.dano;
+	printf("Voce causou um dano de %i na armadura de %s\n",personagem.itens.dano, inimigo.nome);	
+	}	
+		
+	}
+	
+//CASO NAO TENHA:
+    else if(inimigo.defesa<=0){
+    inimigo.vida=inimigo.vida-personagem.itens.dano;
+	printf("%s sofreu um dano de %i\n",inimigo.nome,personagem.itens.dano);	
+    }
+	break;
+
+
+//VAMOS NOS DEFENDER	
+	case 2:
+	//EU FUI ATACADO?
+	//SE A RESPOSTA FOR SIM:
+	if(attack2==1){
+	personagem.itens.defesa=personagem.itens.defesa+inimigo.dano;
+	personagem.itens.defesa=personagem.itens.defesa-(inimigo.dano/10);	
+	printf("-Voce se defendeu e o dano causado foi de apenas %i na armadura.\n", (inimigo.dano/10) );		
+	}
+	
+	//SE A RESPOSTA FOR NÃO
+	else if(attack2==0){
+	printf("-Voce se defendeu de um possivel ataque,porem nenhum dano foi causado.\n");	
+	}
+	break;
+	
+	
+	
+	
+	case 3:
+	//A BFG9000 AINDA TER CARGA?
+	//SE A RESPOSTA FOR SIM:
+	if(personagem.itens.carga!=0){
+		
+	//PRIMEIRO VAMOS CHECAR SE ELE AINDA TEM ARMADURA:
+	if(inimigo.defesa>0){
+	soma=inimigo.defesa-personagem.itens.BFG9000;
+
+    //SE EU ATACAR, A ARMADURA SERA DESTRUIDA?
+    //SE SIM:	
+	if(soma<=0){
+	inimigo.defesa=0;
+	printf("-Voce empunha a BFG9000 e dispara, %s sofre um dano em sua armadura de %i pontos.\n",inimigo.nome, personagem.itens.BFG9000);
+	printf("-A armadura de %s foi completamente destruida\n",inimigo.nome);	
+	printf("-A BFG9000 recebeu mais 1 carga para ser usada\n");
+	personagem.itens.carga=personagem.itens.carga+1;	
+	}
+	
+	//CASO CONTRARIO VAMOS DANIFICAR A ARMADURA
+	else if(soma>0){
+	inimigo.defesa=inimigo.defesa - personagem.itens.BFG9000;
+	printf("-Voce empunha a BFG9000 e dispara, %s sofre um dano em sua armadura de %i pontos.\n",inimigo.nome, personagem.itens.BFG9000);	
+	}	
+    }
+	
+    //CASO NAO TENHA:
+    else if(inimigo.defesa<=0){
+    inimigo.vida=inimigo.vida-personagem.itens.dano;
+    printf("-Voce empunha a BFG9000 e dispara, %s sofre um dano em sua vida de %i pontos.\n",inimigo.nome, personagem.itens.BFG9000);
+    }
+    personagem.itens.carga=personagem.itens.carga-1;
+    }
+    
+    
+    //SE A BFG NÃO TIVER MAIS CARGA:
+    else if(personagem.itens.carga==0){
+    printf("-A BFG9000 nao possui mais municao.\n");
+	}
+	break;
+	
+	
+	
+	case 4:
+//EU FUI ATACADO?
+//SE A RESPOSTA FOR SIM:
+	if(attack2==1){
+		
+	//AINDA TENHO ARMADURA?
+	//SE SIM:
+	if(personagem.itens.defesa!=0){
+	personagem.itens.defesa=personagem.itens.defesa+inimigo.dano;
+	printf("-Voce se desvia do ataque inimigo, nenhum dano foi causado na sua armadura\n");
+	}
+	
+	
+	else if(personagem.itens.defesa==0 && personagem.pv==200){
+	printf("-Voce ate tenta se desviar mas nada pode ser feito\n");	
+	}
+	
+	else if(personagem.itens.defesa==0 && personagem.pv!=200){
+	personagem.pv=personagem.pv+inimigo.dano;
+	printf("-Voce se desvia do ataque inimigo, nenhum dano foi causado em voce\n");	
+	} 	
+	}
+	
+//CASO CONTRARIO:
+	else if(attack2==0){
+	printf("-Voce se desvia do possivel dano causado pelo inimigo, mas ele nao te atacou\n");	
+		
+	}
+	break;
+	
+	default:
+	printf("ERROR, comando invalido");}
+//FIM DAS DECISÕES	
+	
+	
+
+}
+	
+
+}
+//FIM DA ESTRUTURA CASO ELE TENHA ARMADURA
+
+
+
+
+
+//INICIO DA ESTRUTURA CASO ELE NÃO TENHA ARMADURA
+else if(personagem.itens.defesa<=0){
+	
+if(stimpak1!=5){
+	
+	printf("SEU TURNO\n");
+	printf("1-ATACAR\n");
+	printf("2-USAR BFG9000\n");
+	printf("3-USAR STIMPAK\n");
+	printf("4-DESVIAR DO ATAQUE\n");
+	printf("COMANDO:");
+	scanf("%i",&comando);
+	
+switch(comando){
+	
+	case 1:
+	attack1=1;
+//PRIMEIRO VAMOS CHECAR SE ELE AINDA TEM ARMADURA:
+	if(inimigo.defesa>0){
+	soma=inimigo.defesa-personagem.itens.dano;
+
+    //SE EU ATACAR, A ARMADURA SERA DESTRUIDA?
+    //SE SIM:	
+	if(soma<=0){
+	inimigo.defesa=0;
+	printf("-A armadura de %s foi completamente destruida\n",inimigo.nome);
+	printf("-A BFG9000 recebeu mais 1 carga para ser usada\n");
+	personagem.itens.carga=personagem.itens.carga+1;
+	attack1=0;		
+	}
+	
+	//CASO CONTRARIO VAMOS DANIFICAR A ARMADURA
+	else if(soma>0){
+	inimigo.defesa=inimigo.defesa-personagem.itens.dano;
+	printf("Voce causou um dano de %i na armadura de %s\n",personagem.itens.dano, inimigo.nome);	
+	}	
+		
+	}
+	
+//CASO NAO TENHA:
+    else if(inimigo.defesa<=0){
+    inimigo.vida=inimigo.vida-personagem.itens.dano;
+	printf("%s sofreu um dano de %i\n",inimigo.nome,personagem.itens.dano);	
+    }
+	break;
+	
+	
+	case 2:
+	//A BFG9000 AINDA TER CARGA?
+	//SE A RESPOSTA FOR SIM:
+	if(personagem.itens.carga!=0){
+		
+	//PRIMEIRO VAMOS CHECAR SE ELE AINDA TEM ARMADURA:
+	if(inimigo.defesa>0){
+	soma=inimigo.defesa-personagem.itens.BFG9000;
+
+    //SE EU ATACAR, A ARMADURA SERA DESTRUIDA?
+    //SE SIM:	
+	if(soma<=0){
+	inimigo.defesa=0;
+	printf("-Voce empunha a BFG9000 e dispara, %s sofre um dano em sua armadura de %i pontos.\n",inimigo.nome, personagem.itens.BFG9000);
+	printf("-A armadura de %s foi completamente destruida\n",inimigo.nome);	
+	printf("-A BFG9000 recebeu mais 1 carga para ser usada\n");
+	personagem.itens.carga=personagem.itens.carga+1;	
+	}
+	
+	//CASO CONTRARIO VAMOS DANIFICAR A ARMADURA
+	else if(soma>0){
+	inimigo.defesa=inimigo.defesa - personagem.itens.BFG9000;
+	printf("-Voce empunha a BFG9000 e dispara, %s sofre um dano em sua armadura de %i pontos.\n",inimigo.nome, personagem.itens.BFG9000);	
+	}	
+    }
+	
+    //CASO NAO TENHA:
+    else if(inimigo.defesa<=0){
+    inimigo.vida=inimigo.vida-personagem.itens.dano;
+    printf("-Voce empunha a BFG9000 e dispara, %s sofre um dano em sua vida de %i pontos.\n",inimigo.nome, personagem.itens.BFG9000);
+    }
+    personagem.itens.carga=personagem.itens.carga-1;
+    }
+    
+    
+    //SE A BFG NÃO TIVER MAIS CARGA:
+    else if(personagem.itens.carga==0){
+    printf("-A BFG9000 nao possui mais municao.\n");
+	}
+	break;
+	
+	
+	
+	case 3:
+	dado1l6=(rand()%6)+1;
+	dado2l6=(rand()%6)+1;
+	dado3l6=(rand()%6)+1;
+	
+	soma=dado1l6+dado2l6+dado3l6;
+	personagem.pv=personagem.pv+soma;
+	printf("Stimpak te forneceu %i a mais de vida\n",soma);
+	printf("Voce possui %i de vida\n",personagem.pv);
+	stimpak1=stimpak1+1;
+	break;
+	
+	
+	
+	case 4:
+//EU FUI ATACADO?
+//SE A RESPOSTA FOR SIM:
+	if(attack2==1){
+		
+	//AINDA TENHO ARMADURA?
+	//SE SIM:
+	if(personagem.itens.defesa!=0){
+	personagem.itens.defesa=personagem.itens.defesa+inimigo.dano;
+	printf("-Voce se desvia do ataque inimigo, nenhum dano foi causado na sua armadura\n");
+	}
+	
+	
+	else if(personagem.itens.defesa==0 && personagem.pv==200){
+	printf("-Voce ate tenta se desviar mas nada pode ser feito\n");	
+	}
+	
+	else if(personagem.itens.defesa==0 && personagem.pv!=200){
+	personagem.pv=personagem.pv+inimigo.dano;
+	printf("-Voce se desvia do ataque inimigo, nenhum dano foi causado em voce\n");	
+	} 	
+	}
+	
+//CASO CONTRARIO:
+	else if(attack2==0){
+	printf("-Voce se desvia do possivel dano causado pelo inimigo, mas ele nao te atacou\n");	
+		
+	}
+	break;
+	
+	default:
+	printf("ERROR, comando invalido");}
+//FIM DAS DECISÕES	
+}	
+	
+else if(stimpak1==5){
+	printf("SEU TURNO\n");
+	printf("1-ATACAR\n");
+	printf("2-USAR BFG9000\n");
+	printf("3-DESVIAR DO ATAQUE\n");
+	printf("COMANDO:");
+	scanf("%i",&comando);
+	
+switch(comando){
+	
+	case 1:
+	attack1=1;
+//PRIMEIRO VAMOS CHECAR SE ELE AINDA TEM ARMADURA:
+	if(inimigo.defesa>0){
+	soma=inimigo.defesa-personagem.itens.dano;
+
+    //SE EU ATACAR, A ARMADURA SERA DESTRUIDA?
+    //SE SIM:	
+	if(soma<=0){
+	inimigo.defesa=0;
+	printf("-A armadura de %s foi completamente destruida\n",inimigo.nome);
+	printf("-A BFG9000 recebeu mais 1 carga para ser usada\n");
+	personagem.itens.carga=personagem.itens.carga+1;
+	attack1=0;		
+	}
+	
+	//CASO CONTRARIO VAMOS DANIFICAR A ARMADURA
+	else if(soma>0){
+	inimigo.defesa=inimigo.defesa-personagem.itens.dano;
+	printf("Voce causou um dano de %i na armadura de %s\n",personagem.itens.dano, inimigo.nome);	
+	}	
+		
+	}
+	
+//CASO NAO TENHA:
+    else if(inimigo.defesa<=0){
+    inimigo.vida=inimigo.vida-personagem.itens.dano;
+	printf("%s sofreu um dano de %i\n",inimigo.nome,personagem.itens.dano);	
+    }
+	break;
+
+	
+	
+	case 2:
+	//A BFG9000 AINDA TER CARGA?
+	//SE A RESPOSTA FOR SIM:
+	if(personagem.itens.carga!=0){
+		
+	//PRIMEIRO VAMOS CHECAR SE ELE AINDA TEM ARMADURA:
+	if(inimigo.defesa>0){
+	soma=inimigo.defesa-personagem.itens.BFG9000;
+
+    //SE EU ATACAR, A ARMADURA SERA DESTRUIDA?
+    //SE SIM:	
+	if(soma<=0){
+	inimigo.defesa=0;
+	printf("-Voce empunha a BFG9000 e dispara, %s sofre um dano em sua armadura de %i pontos.\n",inimigo.nome, personagem.itens.BFG9000);
+	printf("-A armadura de %s foi completamente destruida\n",inimigo.nome);	
+	printf("-A BFG9000 recebeu mais 1 carga para ser usada\n");
+	personagem.itens.carga=personagem.itens.carga+1;	
+	}
+	
+	//CASO CONTRARIO VAMOS DANIFICAR A ARMADURA
+	else if(soma>0){
+	inimigo.defesa=inimigo.defesa - personagem.itens.BFG9000;
+	printf("-Voce empunha a BFG9000 e dispara, %s sofre um dano em sua armadura de %i pontos.\n",inimigo.nome, personagem.itens.BFG9000);	
+	}	
+    }
+	
+    //CASO NAO TENHA:
+    else if(inimigo.defesa<=0){
+    inimigo.vida=inimigo.vida-personagem.itens.dano;
+    printf("-Voce empunha a BFG9000 e dispara, %s sofre um dano em sua vida de %i pontos.\n",inimigo.nome, personagem.itens.BFG9000);
+    }
+    personagem.itens.carga=personagem.itens.carga-1;
+    }
+    
+    
+    //SE A BFG NÃO TIVER MAIS CARGA:
+    else if(personagem.itens.carga==0){
+    printf("-A BFG9000 nao possui mais municao.\n");
+	}
+	break;
+	
+	
+	
+	case 3:
+//EU FUI ATACADO?
+//SE A RESPOSTA FOR SIM:
+	if(attack2==1){
+		
+	//AINDA TENHO ARMADURA?
+	//SE SIM:
+	if(personagem.itens.defesa!=0){
+	personagem.itens.defesa=personagem.itens.defesa+inimigo.dano;
+	printf("-Voce se desvia do ataque inimigo, nenhum dano foi causado na sua armadura\n");
+	}
+	
+	
+	else if(personagem.itens.defesa==0 && personagem.pv==200){
+	printf("-Voce ate tenta se desviar mas nada pode ser feito\n");	
+	}
+	
+	else if(personagem.itens.defesa==0 && personagem.pv!=200){
+	personagem.pv=personagem.pv+inimigo.dano;
+	printf("-Voce se desvia do ataque inimigo, nenhum dano foi causado em voce\n");	
+	} 	
+	}
+	
+//CASO CONTRARIO:
+	else if(attack2==0){
+	printf("-Voce se desvia do possivel dano causado pelo inimigo, mas ele nao te atacou\n");	
+		
+	}
+	break;
+	
+	default:
+	printf("ERROR, comando invalido");}
+//FIM DAS DECISÕES	
+	
+	
+
+}	
+	
+}
+//FIM DA ESTRUTURA CASO ELE NÃO TENHA ARMADURA	
+//FIM DE TODAS AS POSSIBILIDADES DO PERSONAGEM	
+
+
+
+
+
+
+
+printf("\n");
+printf("TURNO INIMIGO\n");		
+system("pause");
+printf("\n");
+//INICIO DO TURNO INIMIGO
+attack2=0;
+if(inimigo.defesa>0){
+	
+	
+if(stimpak2!=5){
+	
+	dado1l5=(rand()%5)+1;
+	printf("DADO: %i\n",dado1l5);
+	
+switch(dado1l5){
+	
+	case 1:
+	attack2=1;
+//PRIMEIRO VAMOS CHECAR SE ELE AINDA TEM ARMADURA:
+	if(personagem.itens.defesa>0){
+	soma=personagem.itens.defesa-inimigo.dano;
+
+    //SE EU ATACAR, A ARMADURA SERA DESTRUIDA?
+    //SE SIM:	
+	if(soma<=0){
+	personagem.itens.defesa=0;
+	printf("-A sua armadura foi completamente destruida\n");
+	printf("-%s recebeu mais 1 ataque especial para ser usado\n",inimigo.nome);
+	inimigo.carga=inimigo.carga+1;	
+	attack2=0;
+	}
+	
+	//CASO CONTRARIO VAMOS DANIFICAR A ARMADURA
+	else if(soma>0){
+	personagem.itens.defesa=personagem.itens.defesa-inimigo.dano;
+	printf("-%s causou um dano de %i na sua armadura\n", inimigo.nome, inimigo.dano);	
+	}	
+		
+	}
+	
+//CASO NAO TENHA:
+    else if(personagem.itens.armadura<=0){
+    personagem.pv=personagem.pv-inimigo.dano;
+	printf("-Voce sofreu um dano de %i\n",inimigo.dano);	
+    }
+	break;
+
+
+//VAMOS NOS DEFENDER
+	case 2:
+	//EU FUI ATACADO?
+	//SE A RESPOSTA FOR SIM:
+	if(attack1==1){
+	inimigo.defesa=inimigo.defesa+personagem.itens.dano;
+	inimigo.defesa=inimigo.defesa-(personagem.itens.dano/10);	
+	printf("-%s se defendeu e o dano causado foi de apenas %i na armadura.\n",inimigo.nome,(personagem.itens.dano/10) );		
+	}
+	
+	//SE A RESPOSTA FOR NÃO
+	else if(attack2==0){
+	printf("-%s se defendeu de um possivel ataque, porem nada pode ser feito.\n",inimigo.nome);	
+	}
+	break;
+	
+	
+	
+	
+	case 3:
+	//ATAQUE ESPECIAL AINDA TER CARGA?
+	//SE A RESPOSTA FOR SIM:
+	if(inimigo.carga!=0){
+		
+	//PRIMEIRO VAMOS CHECAR SE ELE AINDA TEM ARMADURA:
+	if(personagem.itens.defesa>0){
+	soma=personagem.itens.defesa-inimigo.ataquespecial;
+
+    //SE EU ATACAR, A ARMADURA SERA DESTRUIDA?
+    //SE SIM:	
+	if(soma<=0){
+	personagem.itens.defesa=0;
+	printf("-%s dispara o raio da morte, voce sofre um dano em sua armadura de %i pontos.\n",inimigo.nome, inimigo.ataquespecial);
+	printf("-A sua armadura foi completamente destruida\n");	
+	printf("-Raio da morte recebeu +1 de carga\n");
+	inimigo.carga=inimigo.carga+1;	
+	}
+	
+	//CASO CONTRARIO VAMOS DANIFICAR A ARMADURA
+	else if(soma>0){
+	personagem.itens.defesa=personagem.itens.defesa-inimigo.ataquespecial;
+	printf("-%s dispara o raio da morte, voce sofre um dano em sua armadura de %i pontos.\n",inimigo.nome, inimigo.ataquespecial);	
+	}	
+    }
+	
+    //CASO NAO TENHA:
+    else if(personagem.itens.defesa<=0){
+    personagem.pv=personagem.pv-inimigo.ataquespecial;
+    printf("-%s dispara o raio da morte, voce sofre um dano vital de %i pontos.\n",inimigo.nome, inimigo.ataquespecial);
+    }
+    inimigo.carga=inimigo.carga-1;
+    }
+    
+    
+    //SE A BFG NÃO TIVER MAIS CARGA:
+    else if(inimigo.carga==0){
+    printf("-Raio da morte nao possui mais municao.\n");
+	}
+	break;
+	
+	
+	
+	case 4:
+	dado1l6=(rand()%6)+1;
+	dado2l6=(rand()%6)+1;
+	dado3l6=(rand()%6)+1;
+	
+	soma=dado1l6+dado2l6+dado3l6;
+	inimigo.vida=inimigo.vida+soma;
+	printf("-Stimpak te forneceu  a %s, %i a mais de vida\n",inimigo.nome, soma);
+	printf("-%s possui %i de vida\n",inimigo.nome,inimigo.vida);
+	stimpak2=stimpak2+1;
+	break;
+	
+	
+	
+	case 5:
+//EU FUI ATACADO?
+//SE A RESPOSTA FOR SIM:
+	if(attack1==1){
+		
+	//AINDA TENHO ARMADURA?
+	//SE SIM:
+	if(inimigo.defesa!=0){
+	inimigo.defesa=inimigo.defesa+personagem.itens.dano;
+	printf("-%s se desvia do ataque, nenhum dano foi causado na sua armadura\n",inimigo.nome);
+	}
+	
+	
+	else if(inimigo.defesa==0 && inimigo.vida==300){
+	printf("-%s ate tenta se desviar mas nada pode ser feito\n",inimigo.nome);	
+	}
+	
+	else if(inimigo.defesa==0 && inimigo.vida!=300){
+	personagem.pv=personagem.pv+inimigo.dano;
+	printf("-%s se desvia do seu ataque, nenhum dano foi causado\n",inimigo.nome);	
+	} 	
+	}
+	
+//CASO CONTRARIO:
+	else if(attack1==0){
+		printf("-%s ate tenta se desviar mas nada pode  ser feito\n",inimigo.nome);		
+	}
+	break;
+	
+//FIM DAS DECISÕES	
+}
+}
+
+
+
+else if(stimpak2==5){
+	
+		
+	dado1l4=(rand()%4)+1;
+	printf("DADO: %i\n",dado1l4);
+	
+switch(dado1l4){
+	
+	case 1:
+	attack2=1;
+//PRIMEIRO VAMOS CHECAR SE ELE AINDA TEM ARMADURA:
+	if(personagem.itens.defesa>0){
+	soma=personagem.itens.defesa-inimigo.dano;
+
+    //SE EU ATACAR, A ARMADURA SERA DESTRUIDA?
+    //SE SIM:	
+	if(soma<=0){
+	personagem.itens.defesa=0;
+	printf("-A sua armadura foi completamente destruida\n");
+	printf("-%s recebeu mais 1 ataque especial para ser usado\n",inimigo.nome);
+	inimigo.carga=inimigo.carga+1;	
+	attack2=0;
+	}
+	
+	//CASO CONTRARIO VAMOS DANIFICAR A ARMADURA
+	else if(soma>0){
+	personagem.itens.defesa=personagem.itens.defesa-inimigo.dano;
+	printf("-%s causou um dano de %i na sua armadura\n", inimigo.nome, inimigo.dano);	
+	}	
+		
+	}
+	
+//CASO NAO TENHA:
+    else if(personagem.itens.armadura<=0){
+    personagem.pv=personagem.pv-inimigo.dano;
+	printf("-Voce sofreu um dano de %i\n",inimigo.dano);	
+    }
+	break;
+
+
+//VAMOS NOS DEFENDER
+	case 2:
+	//EU FUI ATACADO?
+	//SE A RESPOSTA FOR SIM:
+	if(attack1==1){
+	inimigo.defesa=inimigo.defesa+personagem.itens.dano;
+	inimigo.defesa=inimigo.defesa-(personagem.itens.dano/10);	
+	printf("-%s se defendeu e o dano causado foi de apenas %i na armadura.\n",inimigo.nome,(personagem.itens.dano/10) );		
+	}
+	
+	//SE A RESPOSTA FOR NÃO
+	else if(attack2==0){
+	printf("-%s se defendeu de um possivel ataque, porem nada pode ser feito.\n",inimigo.nome);	
+	}
+	break;
+	
+	
+	
+	
+	case 3:
+	//ATAQUE ESPECIAL AINDA TER CARGA?
+	//SE A RESPOSTA FOR SIM:
+	if(inimigo.carga!=0){
+		
+	//PRIMEIRO VAMOS CHECAR SE ELE AINDA TEM ARMADURA:
+	if(personagem.itens.defesa>0){
+	soma=personagem.itens.defesa-inimigo.ataquespecial;
+
+    //SE EU ATACAR, A ARMADURA SERA DESTRUIDA?
+    //SE SIM:	
+	if(soma<=0){
+	personagem.itens.defesa=0;
+	printf("-%s dispara o raio da morte, voce sofre um dano em sua armadura de %i pontos.\n",inimigo.nome, inimigo.ataquespecial);
+	printf("-A sua armadura foi completamente destruida\n");	
+	printf("-Raio da morte recebeu +1 de carga\n");
+	inimigo.carga=inimigo.carga+1;	
+	}
+	
+	//CASO CONTRARIO VAMOS DANIFICAR A ARMADURA
+	else if(soma>0){
+	personagem.itens.defesa=personagem.itens.defesa-inimigo.ataquespecial;
+	printf("-%s dispara o raio da morte, voce sofre um dano em sua armadura de %i pontos.\n",inimigo.nome, inimigo.ataquespecial);	
+	
+	}	
+    }
+	
+    //CASO NAO TENHA:
+    else if(personagem.itens.defesa<=0){
+    personagem.pv=personagem.pv-inimigo.ataquespecial;
+    printf("-%s dispara o raio da morte, voce sofre um dano vital de %i pontos.\n",inimigo.nome, inimigo.ataquespecial);
+    }
+    inimigo.carga=inimigo.carga-1;
+    }
+    
+    
+    //SE A BFG NÃO TIVER MAIS CARGA:
+    else if(inimigo.carga==0){
+    printf("-Raio da morte nao possui mais municao.\n");
+	}
+	break;
+	
+	
+	
+	case 4:
+//EU FUI ATACADO?
+//SE A RESPOSTA FOR SIM:
+	if(attack1==1){
+		
+	//AINDA TENHO ARMADURA?
+	//SE SIM:
+	if(inimigo.defesa!=0){
+	inimigo.defesa=inimigo.defesa+personagem.itens.dano;
+	printf("-%s se desvia do seu ataque, nenhum dano foi causado na sua armadura\n",inimigo.nome);
+	}
+	
+	
+	else if(inimigo.defesa==0 && inimigo.vida==300){
+	printf("-%s ate tenta se desviar mas nada pode ser feito\n",inimigo.nome);	
+	}
+	
+	else if(inimigo.defesa==0 && inimigo.vida!=300){
+	personagem.pv=personagem.pv+inimigo.dano;
+	printf("-%s se desvia do seu ataque, nenhum dano foi causado\n",inimigo.nome);	
+	} 	
+	}
+	
+//CASO CONTRARIO:
+	else if(attack1==0){
+	printf("-%s ate tenta se desviar mas nada pode  ser feito\n",inimigo.nome);	
+	}
+	break;
+	
+//FIM DAS DECISÕES	
+}
+	
+	
+	
+	
+}
+
+}
+//FIM DAS ESTRUTURAS DE DECISÃO CASO O BOSS AINDA TENHA ARMADURA
+
+
+//INICIO DAS ESTRUTURAS DE DECISÃO CASO O BOSS NÃO TENHA ARMADURA
+else if(inimigo.defesa<=0){
+	
+if(stimpak2!=5){
+	
+	dado1l4=(rand()%4)+1;
+	printf("DADO: %i\n",dado1l4);
+	
+switch(dado1l4){
+	
+	case 1:
+	attack2=1;
+//PRIMEIRO VAMOS CHECAR SE ELE AINDA TEM ARMADURA:
+	if(personagem.itens.defesa>0){
+	soma=personagem.itens.defesa-inimigo.dano;
+
+    //SE EU ATACAR, A ARMADURA SERA DESTRUIDA?
+    //SE SIM:	
+	if(soma<=0){
+	personagem.itens.defesa=0;
+	printf("-A sua armadura foi completamente destruida\n");
+	printf("-%s recebeu mais 1 ataque especial para ser usado\n",inimigo.nome);
+	inimigo.carga=inimigo.carga+1;	
+	attack2=0;
+	}
+	
+	//CASO CONTRARIO VAMOS DANIFICAR A ARMADURA
+	else if(soma>0){
+	personagem.itens.defesa=personagem.itens.defesa-inimigo.dano;
+	printf("-%s causou um dano de %i na sua armadura\n", inimigo.nome, inimigo.dano);	
+	}	
+		
+	}
+	
+//CASO NAO TENHA:
+    else if(personagem.itens.defesa<=0){
+    personagem.pv=personagem.pv-inimigo.dano;
+	printf("-Voce sofreu um dano de %i\n",inimigo.dano);	
+    }
+	break;
+
+		
+	case 2:
+	//ATAQUE ESPECIAL AINDA TER CARGA?
+	//SE A RESPOSTA FOR SIM:
+	if(inimigo.carga!=0){
+		
+	//PRIMEIRO VAMOS CHECAR SE ELE AINDA TEM ARMADURA:
+	if(personagem.itens.defesa>0){
+	soma=personagem.itens.defesa-inimigo.ataquespecial;
+
+    //SE EU ATACAR, A ARMADURA SERA DESTRUIDA?
+    //SE SIM:	
+	if(soma<=0){
+	personagem.itens.defesa=0;
+	printf("-%s dispara o raio da morte, voce sofre um dano em sua armadura de %i pontos.\n",inimigo.nome, inimigo.ataquespecial);
+	printf("-A sua armadura foi completamente destruida\n");	
+	printf("-Raio da morte recebeu +1 de carga\n");
+	inimigo.carga=inimigo.carga+1;	
+	}
+	
+	//CASO CONTRARIO VAMOS DANIFICAR A ARMADURA
+	else if(soma>0){
+	personagem.itens.defesa=personagem.itens.defesa-inimigo.ataquespecial;
+	printf("-%s dispara o raio da morte, voce sofre um dano em sua armadura de %i pontos.\n",inimigo.nome, inimigo.ataquespecial);	
+	}	
+    }
+	
+    //CASO NAO TENHA:
+    else if(personagem.itens.defesa<=0){
+    personagem.pv=personagem.pv-inimigo.ataquespecial;
+    printf("-%s dispara o raio da morte, voce sofre um dano vital de %i pontos.\n",inimigo.nome, inimigo.ataquespecial);
+    }
+    inimigo.carga=inimigo.carga-1;
+    }
+    
+    
+    //SE A BFG NÃO TIVER MAIS CARGA:
+    else if(inimigo.carga==0){
+    printf("-Raio da morte nao possui mais municao.\n");
+	}
+	break;
+	
+	
+	
+	case 3:
+	dado1l6=(rand()%6)+1;
+	dado2l6=(rand()%6)+1;
+	dado3l6=(rand()%6)+1;
+	
+	soma=dado1l6+dado2l6+dado3l6;
+	inimigo.vida=inimigo.vida+soma;
+	printf("-Stimpak te forneceu  a %s, %i a mais de vida\n",inimigo.nome, soma);
+	printf("-%s possui %i de vida\n",inimigo.nome,inimigo.vida);
+	stimpak2=stimpak2+1;
+	break;
+	
+	
+	
+	case 4:
+//EU FUI ATACADO?
+//SE A RESPOSTA FOR SIM:
+	if(attack1==1){
+		
+	//AINDA TENHO ARMADURA?
+	//SE SIM:
+	if(inimigo.defesa!=0){
+	inimigo.defesa=inimigo.defesa+personagem.itens.dano;
+	printf("-%s se desvia do seu ataque, nenhum dano foi causado na sua armadura\n",inimigo.nome);
+	}
+	
+	
+	else if(inimigo.defesa==0 && inimigo.vida==300){
+	printf("-%s ate tenta se desviar mas nada pode ser feito\n",inimigo.nome);	
+	}
+	
+	else if(inimigo.defesa==0 && inimigo.vida!=300){
+	personagem.pv=personagem.pv+inimigo.dano;
+	printf("-%s se desvia do seu ataque, nenhum dano foi causado\n",inimigo.nome);	
+	} 	
+	}
+	
+//CASO CONTRARIO:
+	else if(attack1==0){
+	printf("-%s ate tenta se desviar mas nada pode  ser feito\n",inimigo.nome);	
+	}
+	break;
+	
+//FIM DAS DECISÕES	
+}
+}
+
+
+
+
+else if(stimpak2==5){
+	
+		
+	dado1l3=(rand()%3)+1;
+		printf("DADO: %i\n",dado1l3);
+	
+switch(dado1l3){
+	
+	case 1:
+	attack2=1;
+//PRIMEIRO VAMOS CHECAR SE ELE AINDA TEM ARMADURA:
+	if(personagem.itens.defesa>0){
+	soma=personagem.itens.defesa-inimigo.dano;
+
+    //SE EU ATACAR, A ARMADURA SERA DESTRUIDA?
+    //SE SIM:	
+	if(soma<=0){
+	personagem.itens.defesa=0;
+	printf("-A sua armadura foi completamente destruida\n");
+	printf("-%s recebeu mais 1 ataque especial para ser usado\n",inimigo.nome);
+	inimigo.carga=inimigo.carga+1;	
+	attack2=0;
+	}
+	
+	//CASO CONTRARIO VAMOS DANIFICAR A ARMADURA
+	else if(soma>0){
+	personagem.itens.defesa=personagem.itens.defesa-inimigo.dano;
+	printf("-%s causou um dano de %i na sua armadura\n", inimigo.nome, inimigo.dano);	
+	}	
+		
+	}
+	
+//CASO NAO TENHA:
+    else if(personagem.itens.defesa<=0){
+    personagem.pv=personagem.pv-inimigo.dano;
+	printf("-Voce sofreu um dano de %i\n",inimigo.dano);	
+    }
+	break;
+
+	
+	case 3:
+	//ATAQUE ESPECIAL AINDA TER CARGA?
+	//SE A RESPOSTA FOR SIM:
+	if(inimigo.carga!=0){
+		
+	//PRIMEIRO VAMOS CHECAR SE ELE AINDA TEM ARMADURA:
+	if(personagem.itens.defesa>0){
+	soma=personagem.itens.defesa-inimigo.ataquespecial;
+
+    //SE EU ATACAR, A ARMADURA SERA DESTRUIDA?
+    //SE SIM:	
+	if(soma<=0){
+	personagem.itens.defesa=0;
+	printf("-%s dispara o raio da morte, voce sofre um dano em sua armadura de %i pontos.\n",inimigo.nome, inimigo.ataquespecial);
+	printf("-A sua armadura foi completamente destruida\n");	
+	printf("-Raio da morte recebeu +1 de carga\n");
+	inimigo.carga=inimigo.carga+1;	
+	}
+	
+	//CASO CONTRARIO VAMOS DANIFICAR A ARMADURA
+	else if(soma>0){
+	personagem.itens.defesa=personagem.itens.defesa-inimigo.ataquespecial;
+	printf("-%s dispara o raio da morte, voce sofre um dano em sua armadura de %i pontos.\n",inimigo.nome, inimigo.ataquespecial);	
+	}	
+    }
+	
+    //CASO NAO TENHA:
+    else if(personagem.itens.defesa<=0){
+    personagem.pv=personagem.pv-inimigo.ataquespecial;
+    printf("-%s dispara o raio da morte, voce sofre um dano vital de %i pontos.\n",inimigo.nome, inimigo.ataquespecial);
+    }
+    inimigo.carga=inimigo.carga-1;
+    }
+    
+    
+    //SE A BFG NÃO TIVER MAIS CARGA:
+    else if(inimigo.carga==0){
+    printf("-Raio da morte nao possui mais municao.\n");
+	}
+	break;
+	
+	
+	
+	case 2:
+//EU FUI ATACADO?
+//SE A RESPOSTA FOR SIM:
+	if(attack1==1){
+		
+	//AINDA TENHO ARMADURA?
+	//SE SIM:
+	if(inimigo.defesa!=0){
+	inimigo.defesa=inimigo.defesa+personagem.itens.dano;
+	printf("-%s se desvia do ataque, nenhum dano foi causado na sua armadura\n",inimigo.nome);
+	}
+	
+	
+	else if(inimigo.defesa==0 && inimigo.vida==300){
+	printf("-%s ate tenta se desviar mas nada pode ser feito\n",inimigo.nome);	
+	}
+	
+	else if(inimigo.defesa==0 && inimigo.vida!=300){
+	personagem.pv=personagem.pv+inimigo.dano;
+	printf("-%s se desvia do seu ataque, nenhum dano foi causado\n",inimigo.nome);	
+	} 	
+	}
+	
+//CASO CONTRARIO:
+	else if(attack1==0){
+    printf("-%s ate tenta se desviar mas nada pode  ser feito\n",inimigo.nome);	
+	}
+	break;
+	
+//FIM DAS DECISÕES	
+}
+	
+	
+	
+	
+}	
+	
+	
+	
+}
+
+
+	
+	
+}
+//FIM DO LOOP LUTA	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
 
 
@@ -2180,7 +3401,7 @@ void Premiacao1(int *nivel,int *pv, int *pvtotal, int *forca, int *constituicao,
 		printf("1-FORCA: %i\n",*forca);
 		printf("2-CONSTITUICAO: %i\n",*constituicao);
 		printf("3-AGILIDADE: %i\n",*agilidade);
-		printf("4-DESTREZA: %i,\n",*destreza);
+		printf("4-DESTREZA: %i\n",*destreza);
 		printf("ESCOLHA UM ATRIBUTO:");
 		scanf("%i",&comando);
 
@@ -2383,7 +3604,7 @@ void Premiacao2(int *nivel,int *pv, int *pvtotal, int *forca, int *constituicao,
 		printf("1-FORCA: %i\n",*forca);
 		printf("2-CONSTITUICAO: %i\n",*constituicao);
 		printf("3-AGILIDADE: %i\n",*agilidade);
-		printf("4-DESTREZA: %i,\n",*destreza);
+		printf("4-DESTREZA: %i\n",*destreza);
 		printf("ESCOLHA UM ATRIBUTO:");
 		scanf("%i",&comando);
 
@@ -2528,7 +3749,7 @@ void Premiacao2(int *nivel,int *pv, int *pvtotal, int *forca, int *constituicao,
 	}
 
 	else if(comando==0) {
-		printf("NAO APRENDE MESMO NE IDIOTA? AGORA JA ERA");
+		printf("NAO APRENDE MESMO NE IDIOTA? AGORA JA ERA\n\n");
 		system("pause");
 		system("cls");
 
@@ -2569,3 +3790,4 @@ void youwin() {
 	
 	 
 }
+
