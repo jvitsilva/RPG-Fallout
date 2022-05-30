@@ -1,3 +1,4 @@
+// AUTORES: JOAO VITOR, CARLOS HENRIQUE E JOAO RENAN 
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -91,16 +92,17 @@ void main() {
 			Sleep(100); // sleep 0,5 segundo
 		}
 		
-    youwin();
+    
 	printf("\n\nGostaria de iniciar\?:\n");
 	printf("SIM[1] NAO[0] \n->");
 	scanf("%i",&menu);
+   
+	while(menu) {
 	
-	for (i = 0; i <= 100; i++)
-   {                
-      //printf ("\r  %d%%", i);      
-      printf ("  %d%%\r", i);
-      fflush (stdout);
+	for (i = 0; i <= 100; i++) {                
+          //printf ("\r  %d%%", i);      
+          printf ("  %d%%\r", i);
+          fflush (stdout);
 	  Sleep(50);                      
          
       for (j = 0; j < i; j++)
@@ -115,8 +117,6 @@ void main() {
 
    printf("\n\n");
    system ("cls");
-   
-	while(menu) {
 
 	printf("\n\n----------------------//\\                  *******************************************************************************************************************\n");
 	printf("---------------------///\\                  *******************************************************************************************************************\n");
@@ -968,9 +968,9 @@ void Escolha3() {
 void Luta() {
 //QUEBRE ESTE COMENTARIO PARA ACESSAR O GODMODE
 
-	personagem.itens.dano=9999;
+	/*personagem.itens.dano=9999;
 	personagem.itens.defesa=9999;
-	personagem.pv=9999;
+	personagem.pv=9999;*/
 
 
 	srand(time(NULL));
