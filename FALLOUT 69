@@ -2158,7 +2158,7 @@ void Traje() {
 
 //MONTAGEM DO BOSS
 void Assembly(){
-	strcpy(inimigo.nome,"20COMER70CORRER");
+	strcpy(inimigo.nome,"ALESSANDRA");
 	personagem.nome[strlen(personagem.nome) - 1] = '\0';
 	inimigo.dano=personagem.itens.dano+10;
 	inimigo.defesa=personagem.itens.defesa+100;
