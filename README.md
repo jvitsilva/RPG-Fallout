@@ -1,4 +1,4 @@
-# RPG-Fallout
+# Fallout 69
 
 Uma paródia de RPG feita em linguagem C da saga Fallout, criada para curso de Engenharia da Computação;
 
